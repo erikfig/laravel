@@ -169,6 +169,11 @@ return [
          */
 
         /*
+         * My Modules
+         */
+         Modules\Bake\Providers\BakeServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
