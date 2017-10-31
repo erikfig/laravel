@@ -18,6 +18,7 @@ class BakeCommand extends Command
         $base_dir = base_path('modules' . DIRECTORY_SEPARATOR);
         $this->singular_name = str_singular($this->argument('name'));
         $this->plural_name = $this->argument('name');
+        $module_dir = $base_dir . studly_case($this->plural_name);
 
         if (is_dir($base_dir . $this->argument('name'))) {
             throw new \Exception('This modules exists!');
@@ -39,21 +40,23 @@ class BakeCommand extends Command
             ],
             'view' => 'index.blade.php',
         ];
-        
-        mkdir($base_dir . studly_case($this->plural_name));
-        
+
+        mkdir($module_dir);
+        $module_dir = $base_dir . studly_case($this->plural_name) . DIRECTORY_SEPARATOR . 'src';
+        mkdir($module_dir);
+
         foreach ($directories as $directory) {
-            mkdir($base_dir . studly_case($this->plural_name) . '/' . $directory);
+            mkdir($module_dir . '/' . $directory);
         }
-        
+
         $origin = $base_dir.'Bake/bake_template/';
-        
-        $this->createFile($origin . '/Controllers/Controller.php', $base_dir . studly_case($this->plural_name) . '/Controllers/' . studly_case($this->plural_name) . 'Controller.php');
-        $this->createFile($origin . '/Providers/ServiceProvider.php', $base_dir . studly_case($this->plural_name) . '/Providers/' . studly_case($this->singular_name) . 'ServiceProvider.php');
-        $this->createFile($origin . '/Routes/api.php', $base_dir . studly_case($this->plural_name) . '/Routes/api.php');
-        $this->createFile($origin . '/Routes/web.php', $base_dir . studly_case($this->plural_name) . '/Routes/web.php');
-        $this->createFile($origin . '/Views/index.blade.php', $base_dir . studly_case($this->plural_name) . '/Views/index.blade.php');
-        
+
+        $this->createFile($origin . '/Controllers/Controller.php', $module_dir . '/Controllers/' . studly_case($this->plural_name) . 'Controller.php');
+        $this->createFile($origin . '/Providers/ServiceProvider.php', $module_dir . '/Providers/' . studly_case($this->singular_name) . 'ServiceProvider.php');
+        $this->createFile($origin . '/Routes/api.php', $module_dir . '/Routes/api.php');
+        $this->createFile($origin . '/Routes/web.php', $module_dir . '/Routes/web.php');
+        $this->createFile($origin . '/Views/index.blade.php', $module_dir . '/Views/index.blade.php');
+
         $this->output->writeln([
             'Add this provider to config/app.php:',
             'Modules\\' . studly_case($this->plural_name) . '\Providers\\' . studly_case($this->singular_name) . 'ServiceProvider::class,'
