@@ -14,5 +14,17 @@ class BakeServiceProvider extends ServiceProvider
                 BakeCommand::class
             ]);
         }
+
+        $this->publishes([
+            __DIR__.'/../config/modules.php' => config_path('modules.php'),
+        ], 'config');
+    }
+
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/modules.php',
+            'modules'
+        );
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\{{plural-upper}}\Providers;
+namespace {{vendor-name}}\{{plural-upper}}\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class {{singular-upper}}ServiceProvider extends ServiceProvider
 {
-    protected $namespace = 'Modules\{{plural-upper}}\Controllers';
-    
+    protected $namespace = '{{vendor-name}}\{{plural-upper}}\Controllers';
+
     public function boot()
     {
         $this->webRoutes();
@@ -17,7 +17,7 @@ class {{singular-upper}}ServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Views', '{{singular-upper}}');
     }
 
-    
+
     public function register()
     {
         //
@@ -32,7 +32,7 @@ class {{singular-upper}}ServiceProvider extends ServiceProvider
     }
 
     protected function apiRoutes()
-    {        
+    {
         if (!$this->app->routesAreCached()) {
             Route::prefix('api')
                 ->namespace($this->namespace)
