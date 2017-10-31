@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Bake\Providers;
+namespace ErikFig\BakeModules\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\Bake\Console\Commands\BakeCommand;
+use ErikFig\BakeModules\Console\Commands\BakeCommand;
 
 class BakeServiceProvider extends ServiceProvider
 {

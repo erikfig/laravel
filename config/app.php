@@ -171,7 +171,7 @@ return [
         /*
          * My Modules
          */
-         Modules\Bake\Providers\BakeServiceProvider::class,
+        ErikFig\BakeModules\Providers\BakeServiceProvider::class,
 
         /*
          * Application Service Providers...

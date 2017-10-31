@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Bake\Console\Commands;
+namespace ErikFig\BakeModules\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
@@ -55,7 +55,7 @@ class BakeCommand extends Command
             mkdir($module_dir . '/' . $directory);
         }
 
-        $origin = base_path('modules').'/Bake/bake_template';
+        $origin = __DIR__.'/../../bake_template';
 
         $this->createFile($origin . '/Controllers/Controller.php', $module_dir . '/Controllers/' . studly_case($this->plural_name) . 'Controller.php');
         $this->createFile($origin . '/Providers/ServiceProvider.php', $module_dir . '/Providers/' . studly_case($this->singular_name) . 'ServiceProvider.php');
@@ -73,7 +73,7 @@ class BakeCommand extends Command
             '},',
             '',
             'Add this provider to config/app.php:',
-            'Modules\\' . studly_case($this->plural_name) . '\Providers\\' . studly_case($this->singular_name) . 'ServiceProvider::class,'
+            config('modules.vendorName'). '\\' . studly_case($this->plural_name) . '\Providers\\' . studly_case($this->singular_name) . 'ServiceProvider::class,'
         ]);
     }
 

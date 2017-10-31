@@ -12,5 +12,12 @@
         "psr-4": {
             "{{vendor-name}}\\{{plural-upper}}": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "{{vendor-name}}\\{{plural-upper}}\\Providers\\{{plural-upper}}ServiceProvider"
+            ]
+        }
     }
 }
