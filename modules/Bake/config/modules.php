@@ -2,5 +2,6 @@
 
 return [
     'vendorName' => 'Modules',
-    'basePath' => 'modules'
+    'basePath' => 'modules',
+    'packageVendorName' => 'modules',
 ];

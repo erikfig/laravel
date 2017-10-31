@@ -12,12 +12,14 @@ class BakeCommand extends Command
 
     protected $singular_name;
     protected $plural_name;
+    protected $plural_name_slug;
 
     public function handle()
     {
         $base_dir = base_path(config('modules.basePath') . DIRECTORY_SEPARATOR);
         $this->singular_name = str_singular($this->argument('name'));
         $this->plural_name = $this->argument('name');
+        $this->plural_name_slug = kebab_case($this->plural_name);
         $module_dir = $base_dir . studly_case($this->plural_name);
 
         if (!is_dir($base_dir)) {
@@ -60,6 +62,7 @@ class BakeCommand extends Command
         $this->createFile($origin . '/Routes/api.php', $module_dir . '/Routes/api.php');
         $this->createFile($origin . '/Routes/web.php', $module_dir . '/Routes/web.php');
         $this->createFile($origin . '/Views/index.blade.php', $module_dir . '/Views/index.blade.php');
+        $this->createFile($origin . '/composer.json', $module_dir . '/../composer.json');
 
         $this->output->writeln([
             'Add autoload to composer.json:',
@@ -82,6 +85,8 @@ class BakeCommand extends Command
         $content = str_replace("{{singular-upper}}", studly_case($this->singular_name), $content);
         $content = str_replace("{{singular-lower}}", $this->singular_name, $content);
         $content = str_replace("{{vendor-name}}", config('modules.vendorName'), $content);
+        $content = str_replace("{{package-vendor-name}}", config('modules.packageVendorName'), $content);
+        $content = str_replace("{{plural-slug}}", $this->plural_name_slug, $content);
         file_put_contents($destiny, $content);
     }
 }
