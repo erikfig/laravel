@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'vendorName' => 'Modules',
+    'vendorName' => 'ErikFig',
     'basePath' => 'modules',
-    'packageVendorName' => 'modules',
+    'packageVendorName' => 'erikfig',
 ];
